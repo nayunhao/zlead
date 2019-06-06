@@ -1,0 +1,31 @@
+
+server:
+  port: 8099
+
+mybatis:
+  type-aliases-package: com.zlead.entrty #所有实体类所在的包名
+
+eureka:
+  instance:
+    prefer-ip-address: true #注册服务的ip
+  client:
+    register-with-eureka: true #使用Eureka注册服务
+    fetch-registry: true #在本地缓存注册表
+    service-url:
+      defaultZone: http://localhost:8761/eureka #Eureka服务位置
+
+spring:
+  application:
+    name: zlead-goods-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.0.238:3306/zlead_shop_goods?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    platform: mysql
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# 配置slq打印日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
