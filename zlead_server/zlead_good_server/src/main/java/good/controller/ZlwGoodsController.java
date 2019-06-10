@@ -78,6 +78,12 @@ public class ZlwGoodsController extends BaseController {
         return result;
     }
 
+    /**
+     * nayunhao
+     * 添加分类
+     * @param apiRequest
+     * @return
+     */
     @RequestMapping(value="/addShopGoodsClass",method = RequestMethod.POST)
     public ApiResult addShopGoodsClass(@RequestBody ApiRequest apiRequest){
         Map data = apiRequest.getData();
