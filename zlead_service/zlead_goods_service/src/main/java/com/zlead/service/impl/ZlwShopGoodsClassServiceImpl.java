@@ -52,10 +52,10 @@ public class ZlwShopGoodsClassServiceImpl extends ServiceImpl<ZlwShopGoodsClassM
     @Autowired
     private  ZlwShopGoodsClassMapper zlwShopGoodsClassMapper;
 
-    @Override
-    public List<ZlwShopGoodsClass> selectByMap( Map<String, Object> map){
-        return zlwShopGoodsClassMapper.selectByMap(map);
-    }
+//    @Override
+//    public List<ZlwShopGoodsClass> selectByMap( Map<String, Object> map){
+//        return zlwShopGoodsClassMapper.selectByMap(map);
+//    }
 
     @Override
     public boolean editShopGoodsClass(Map<String, Object> map) {

@@ -22,4 +22,9 @@ public interface IZlwShopGoodsUnitService extends IService<ZlwShopGoodsUnit> {
      */
     Map<String, Object> getShopGoodsUnit();
 
+    /**
+     *
+     *
+     */
+    ZlwShopGoodsUnit getShopGoodsUnitByName(String unitName);
 }

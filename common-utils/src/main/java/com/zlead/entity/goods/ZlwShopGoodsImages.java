@@ -28,7 +28,7 @@ package com.zlead.entity.goods;
             /**
             * 店铺商品编号
             */
-    private Long sgCode;
+    private String sgkId;
 
             /**
             * 店铺id
@@ -44,7 +44,17 @@ package com.zlead.entity.goods;
             * 图片类型 1：png 2：bmp 3：gif
             */
     private Integer sgImageType;
-
+    /**
+     * 1封面，2详情
+     *
+     */
+    private Integer sgApplicationType;
+    /**
+     * 图片描述
+     *
+     *
+     */
+    private String sgImageDesc;
             /**
             * 排序
             */

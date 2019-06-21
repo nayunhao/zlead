@@ -19,4 +19,10 @@ public interface IZlwShopGoodsBrandService extends IService<ZlwShopGoodsBrand> {
      * 获取所有品牌
      */
     Map<String, Object> getShopGoodsBrand(String searchKey);
+    /**
+     * nayunhao
+     * 根据品牌名获得品牌
+     *
+     */
+    ZlwShopGoodsBrand getShopGoodsBrandByName(String brandName);
 }

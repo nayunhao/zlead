@@ -2,6 +2,7 @@ package com.zlead.controller;
 
 import com.zlead.domain.ApiRequest;
 import com.zlead.domain.ApiResult;
+import com.zlead.entity.goods.ZlwPlatformGoodsClass;
 import com.zlead.service.IZlwPlatformGoodsClassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,12 @@ public class ZlwPlatformClassController {
         }
         return apiResult;
     }
+
+    @PostMapping("/getPlatGoodsClassByName")
+    public ZlwPlatformGoodsClass getPlatGoodsClassByName(@RequestBody String className){
+        ZlwPlatformGoodsClass zlwPlatformGoodsClass = iZlwPlatformGoodsClassService.getPlatGoodsClassByName(className);
+        return zlwPlatformGoodsClass;
+    }
+
 
 }

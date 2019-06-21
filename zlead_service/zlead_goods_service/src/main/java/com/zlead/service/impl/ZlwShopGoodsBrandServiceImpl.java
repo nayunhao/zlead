@@ -1,5 +1,6 @@
 package com.zlead.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zlead.dao.mapper.ZlwShopGoodsBrandMapper;
 import com.zlead.entity.goods.ZlwShopGoodsBrand;
@@ -56,5 +57,17 @@ public class ZlwShopGoodsBrandServiceImpl extends ServiceImpl<ZlwShopGoodsBrandM
         return resultMap;
     }
 
-
+    /**
+     * nayunhao
+     * 根据品牌名查询品牌
+     * @param brandName
+     * @return
+     */
+    @Override
+    public ZlwShopGoodsBrand getShopGoodsBrandByName(String brandName) {
+        QueryWrapper<ZlwShopGoodsBrand> queryWrapper = new QueryWrapper<ZlwShopGoodsBrand>();
+        queryWrapper.eq("sgb_name",brandName);
+        ZlwShopGoodsBrand zlwShopGoodsBrand = zlwShopGoodsBrandMapper.selectOne(queryWrapper);
+        return zlwShopGoodsBrand;
+    }
 }

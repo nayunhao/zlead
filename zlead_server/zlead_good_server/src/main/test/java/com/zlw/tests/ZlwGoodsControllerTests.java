@@ -25,7 +25,7 @@ public class ZlwGoodsControllerTests {
         map.put("parentId","0");
         request.setPlatform("pc");
         request.setData(map);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://localhost:7001/goods/addShopGoodsClass",request,String.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity("http://192.168.0.224:7001/goods/addGoodsByOne",request,String.class);
         String body = responseEntity.getBody();
         System.out.println(body);
     }

@@ -8,11 +8,11 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class ZlwShopGoodsBrand {
-    private Long sgbId;//品牌ID
+    private String sgbId;//品牌ID
 
-    private Long pgbId;//平台品牌ID
+    private String pgbId;//平台品牌ID
 
-    private Long sgmId;//生产企业id
+    private String sgmId;//生产企业id
 
     private String sgbName;//品牌名称
 

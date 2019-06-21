@@ -1,6 +1,8 @@
 package com.zlead.entity.goods;
 
     import java.io.Serializable;
+    import java.math.BigDecimal;
+
     import lombok.Data;
     import lombok.EqualsAndHashCode;
     import lombok.experimental.Accessors;
@@ -28,27 +30,34 @@ package com.zlead.entity.goods;
             /**
             * 进货价格
             */
-    private String sgpPrivatePrice;
+    private BigDecimal sgpPrivatePrice;
+
+    /**
+     * 成本价格
+     *
+     */
+
+    private BigDecimal sgpCostPrice;
 
             /**
             * 线下售价
             */
-    private byte[] sgpPublicPrice;
+    private BigDecimal sgpPublicPrice;
 
             /**
             * 网销售价
             */
-    private String sgpPublicEprice;
+    private BigDecimal sgpPublicEprice;
 
             /**
             * 参考售价
             */
-    private String sgpReferencePrice;
+    private BigDecimal sgpReferencePrice;
 
             /**
             * 整批售价
             */
-    private String sgpWholePrice;
+    private BigDecimal sgpWholePrice;
 
             /**
             * 店铺id

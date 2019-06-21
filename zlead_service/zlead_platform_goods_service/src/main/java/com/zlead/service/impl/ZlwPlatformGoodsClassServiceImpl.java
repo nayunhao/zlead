@@ -1,8 +1,10 @@
 package com.zlead.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zlead.dao.mapper.ZlwPlatformGoodsClassMapper;
 import com.zlead.entity.goods.ZlwPlatformGoodsClass;
+import com.zlead.entity.goods.ZlwShopGoodsClass;
 import com.zlead.service.IZlwPlatformGoodsClassService;
 import com.zlead.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,19 @@ public class ZlwPlatformGoodsClassServiceImpl extends ServiceImpl<ZlwPlatformGoo
         resultMap.put("platFormClass", list);
 
         return resultMap;
+    }
+
+    /**
+     * nayunhao
+     * 根据分类名获取分类
+     * @param className
+     * @return
+     */
+    @Override
+    public ZlwPlatformGoodsClass getPlatGoodsClassByName(String className) {
+        QueryWrapper<ZlwPlatformGoodsClass> queryWrapper = new QueryWrapper<ZlwPlatformGoodsClass>();
+        queryWrapper.eq("pgc_name",className);
+        ZlwPlatformGoodsClass zlwPlatformGoodsClass = zlwPlatformGoodsClassMapper.selectOne(queryWrapper);
+        return zlwPlatformGoodsClass;
     }
 }

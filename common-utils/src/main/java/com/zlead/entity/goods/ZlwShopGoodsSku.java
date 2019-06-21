@@ -1,5 +1,6 @@
 package com.zlead.entity.goods;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,16 +25,20 @@ public class ZlwShopGoodsSku implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //库存
+    @TableField(exist = false)
     private String inventoryValue;
     //规格名称
+    @TableField(exist = false)
     private String GoodSpecName;
     //规格值
+    @TableField(exist = false)
     private String GoodSpecValue;
     //商品名称
+    @TableField(exist = false)
     private String sgName;
-
+    @TableField(exist = false)
     private String sgClassName1;
-
+    @TableField(exist = false)
     private String sgClassName2;
     /**
      * 编号
@@ -99,7 +104,7 @@ public class ZlwShopGoodsSku implements Serializable {
     /**
      * 发布渠道 1：门店 2：网络
      */
-    private Integer sgFromSource;
+    private Integer sgSalesTarget;
 
     /**
      * 状态 -1：全部 1：销售中 2：下架 3：违规下架
@@ -165,6 +170,9 @@ public class ZlwShopGoodsSku implements Serializable {
      * 置顶时间
      */
     private Date sgSortTime;
-
+    /**
+     * 月销统计数据
+     */
+    private String sgMonthsaleCount;
 
 }

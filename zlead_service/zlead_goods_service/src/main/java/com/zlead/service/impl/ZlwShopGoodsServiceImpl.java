@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -83,28 +84,41 @@ public class ZlwShopGoodsServiceImpl extends ServiceImpl<ZlwShopGoodsMapper, Zlw
     }
 
     /**
+     * nayunhao
      * 添加商品，调用事务
      * @param zlwShopGoods 商品店铺spu表
-     * @param zlwShopGoodsSku  商品店铺sku表
-     * @param zlwShopGoodsSpec  店铺SKU-商品规格表
-     * @param zlwShopGoodsPrice 店铺SKU-商品价格表
-     * @param zlwShopGoodsSpecsName 店铺SKU-商品名称规格表
-     * @param zlwShopGoodsSpecsValue 店铺SKU-商品规格值表
+     * @param zlwShopGoodsSkus  商品店铺sku表
+     * @param zlwShopGoodsSpecs  店铺SKU-商品规格表
+     * @param zlwShopGoodsPrices 店铺SKU-商品价格表
+     * @param zlwShopGoodsSpecsNames 店铺SKU-商品名称规格表
+     * @param zlwShopGoodsSpecsValues 店铺SKU-商品规格值表
      * @param zlwShopGoodsImages 店铺SKU-商品图片表
-     * @param zlwShopGoodsInventory 店铺SKU-商品库存表
+     * @param zlwShopGoodsInventorys 店铺SKU-商品库存表
      */
     @Override
     @Transactional(propagation= Propagation.REQUIRED,isolation= Isolation.DEFAULT,readOnly = false,rollbackFor=Exception.class)
-    public void addGoodsTrans(ZlwShopGoods zlwShopGoods, ZlwShopGoodsSku zlwShopGoodsSku, ZlwShopGoodsSpec zlwShopGoodsSpec, ZlwShopGoodsPrice zlwShopGoodsPrice, ZlwShopGoodsSpecsName zlwShopGoodsSpecsName, ZlwShopGoodsSpecsValue zlwShopGoodsSpecsValue, ZlwShopGoodsImages zlwShopGoodsImages, ZlwShopGoodsInventory zlwShopGoodsInventory) throws Exception{
+    public void addGoodsTrans(ZlwShopGoods zlwShopGoods, List<ZlwShopGoodsSku> zlwShopGoodsSkus, List<ZlwShopGoodsSpec> zlwShopGoodsSpecs, List<ZlwShopGoodsPrice> zlwShopGoodsPrices, List<ZlwShopGoodsSpecsName> zlwShopGoodsSpecsNames, List<ZlwShopGoodsSpecsValue> zlwShopGoodsSpecsValues, List<ZlwShopGoodsImages> zlwShopGoodsImages, List<ZlwShopGoodsInventory> zlwShopGoodsInventorys) throws Exception{
         zlwShopGoodsMapper.insert(zlwShopGoods);
-        zlwShopGoodsSkuMapper.insert(zlwShopGoodsSku);
-        zlwShopGoodsSpecMapper.insert(zlwShopGoodsSpec);
-        zlwShopGoodsPriceMapper.insert(zlwShopGoodsPrice);
-        zlwShopGoodsSpecsNameMapper.insert(zlwShopGoodsSpecsName);
-        String s=null;
-        s.length();//Exception
-        zlwShopGoodsSpecsValueMapper.insert(zlwShopGoodsSpecsValue);
-        zlwShopGoodsImagesMapper.insert(zlwShopGoodsImages);
-        zlwShopGoodsInventoryMapper.insert(zlwShopGoodsInventory);
+        for(ZlwShopGoodsSku zlwShopGoodsSku:zlwShopGoodsSkus){
+            zlwShopGoodsSkuMapper.insert(zlwShopGoodsSku);
+        }
+        for (ZlwShopGoodsSpec zlwShopGoodsSpec:zlwShopGoodsSpecs){
+            zlwShopGoodsSpecMapper.insert(zlwShopGoodsSpec);
+        }
+        for(ZlwShopGoodsPrice zlwShopGoodsPrice:zlwShopGoodsPrices){
+            zlwShopGoodsPriceMapper.insert(zlwShopGoodsPrice);
+        }
+        for (ZlwShopGoodsSpecsName zlwShopGoodsSpecsName:zlwShopGoodsSpecsNames) {
+            zlwShopGoodsSpecsNameMapper.insert(zlwShopGoodsSpecsName);
+        }
+        for (ZlwShopGoodsSpecsValue zlwShopGoodsSpecsValue:zlwShopGoodsSpecsValues){
+            zlwShopGoodsSpecsValueMapper.insert(zlwShopGoodsSpecsValue);
+        }
+        for (ZlwShopGoodsImages zlwShopGoodsImage:zlwShopGoodsImages){
+            zlwShopGoodsImagesMapper.insert(zlwShopGoodsImage);
+        }
+        for (ZlwShopGoodsInventory zlwShopGoodsInventory:zlwShopGoodsInventorys) {
+            zlwShopGoodsInventoryMapper.insert(zlwShopGoodsInventory);
+        }
     }
 }

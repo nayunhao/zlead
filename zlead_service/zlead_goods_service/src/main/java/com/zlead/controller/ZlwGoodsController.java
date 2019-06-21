@@ -1,11 +1,12 @@
 package com.zlead.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zlead.domain.ApiRequest;
 import com.zlead.domain.ApiResult;
 import com.zlead.entity.goods.*;
-import com.zlead.service.IZlwShopGoodsClassService;
-import com.zlead.service.IZlwShopGoodsService;
-import com.zlead.service.IZlwShopGoodsSkuService;
+import com.zlead.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,10 @@ public class ZlwGoodsController {
 
     @Autowired
     private IZlwShopGoodsSkuService zlwShopGoodsSkuService;
+    @Autowired
+    private IZlwShopGoodsBrandService iZlwShopGoodsBrandService;
+    @Autowired
+    private IZlwShopGoodsUnitService iZlwShopGoodsUnitService;
 
     /* *
      * @Author GuoYunFei
@@ -84,6 +89,7 @@ public class ZlwGoodsController {
     @Autowired
     private IZlwShopGoodsSkuService iZlwShopGoodsSkuService;
     /**
+     * nayunhao
      * 添加店铺分类
      * @param zlwShopGoodsClass
      * @return
@@ -95,30 +101,33 @@ public class ZlwGoodsController {
     }
 
     /**
+     * nayunhao
      * 添加商品，事务控制
      * @param data
      * @return
      */
     @PostMapping("/addGoodsByOne")
     public boolean addGoodsByOne(@RequestBody Map<String,Object> data){
-        ZlwShopGoods zlwShopGoods = (ZlwShopGoods)data.get("zlwShopGoods");
-        ZlwShopGoodsSku zlwShopGoodsSku = (ZlwShopGoodsSku)data.get("zlwShopGoodsSku");
-        ZlwShopGoodsSpec zlwShopGoodsSpec = (ZlwShopGoodsSpec)data.get("zlwShopGoodsSpec");
-        ZlwShopGoodsPrice zlwShopGoodsPrice = (ZlwShopGoodsPrice)data.get("zlwShopGoodsPrice");
-        ZlwShopGoodsSpecsName zlwShopGoodsSpecsName = (ZlwShopGoodsSpecsName)data.get("zlwShopGoodsSpecsName");
-        ZlwShopGoodsSpecsValue zlwShopGoodsSpecsValue = (ZlwShopGoodsSpecsValue)data.get("zlwShopGoodsSpecsValue");
-        ZlwShopGoodsImages ZlwShopGoodsImages = (ZlwShopGoodsImages)data.get("ZlwShopGoodsImages");
-        ZlwShopGoodsInventory zlwShopGoodsInventory = (ZlwShopGoodsInventory)data.get("zlwShopGoodsInventory");
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        ZlwShopGoods zlwShopGoods = objectMapper.convertValue(data.get("zlwShopGoods"),ZlwShopGoods.class);
+        List<ZlwShopGoodsSku> zlwShopGoodsSkus = objectMapper.convertValue(data.get("zlwShopGoodsSku"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsSku.class));
+        List<ZlwShopGoodsSpec> zlwShopGoodsSpecs = objectMapper.convertValue(data.get("zlwShopGoodsSpec"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsSpec.class));
+        List<ZlwShopGoodsPrice> zlwShopGoodsPrices = objectMapper.convertValue(data.get("zlwShopGoodsPrice"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsPrice.class));
+        List<ZlwShopGoodsSpecsName> zlwShopGoodsSpecsNames = objectMapper.convertValue(data.get("zlwShopGoodsSpecsName"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsSpecsName.class));
+        List<ZlwShopGoodsSpecsValue> zlwShopGoodsSpecsValues = objectMapper.convertValue(data.get("zlwShopGoodsSpecsValue"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsSpecsValue.class));
+        List<ZlwShopGoodsImages> ZlwShopGoodsImages = objectMapper.convertValue(data.get("zlwShopGoodsImages"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsImages.class));
+        List<ZlwShopGoodsInventory> zlwShopGoodsInventorys = objectMapper.convertValue(data.get("zlwShopGoodsInventory"),objectMapper.getTypeFactory().constructParametricType(List.class, ZlwShopGoodsInventory.class));
         try{
-            iZlwShopGoodsService.addGoodsTrans(zlwShopGoods,zlwShopGoodsSku,zlwShopGoodsSpec,zlwShopGoodsPrice,zlwShopGoodsSpecsName,zlwShopGoodsSpecsValue,ZlwShopGoodsImages,zlwShopGoodsInventory);
+            iZlwShopGoodsService.addGoodsTrans(zlwShopGoods,zlwShopGoodsSkus,zlwShopGoodsSpecs,zlwShopGoodsPrices,zlwShopGoodsSpecsNames,zlwShopGoodsSpecsValues,ZlwShopGoodsImages,zlwShopGoodsInventorys);
         }catch(Exception e){
+            e.printStackTrace();
            return false;
         }
         return true;
     }
 
     /**
+     * nayunhao
      * 根据分类名查询分类
      * @param className
      * @return
@@ -129,6 +138,56 @@ public class ZlwGoodsController {
         return zlwShopGoodsClass;
     }
 
+    /**
+     *nayunhao
+     * 根据名称查询品牌
+     * @param brandName
+     * @return
+     */
+    @PostMapping("/getShopGoodsBrandByName")
+    public ZlwShopGoodsBrand getShopGoodsBrandByName(@RequestBody String brandName){
+        ZlwShopGoodsBrand zlwShopGoodsBrand = iZlwShopGoodsBrandService.getShopGoodsBrandByName(brandName);
+        return zlwShopGoodsBrand;
+    }
+
+    /**
+     * nayunhao
+     * 根据名称查询单位
+     * @param unitName
+     * @return
+     */
+    @PostMapping("/getShopGoodsUnitByName")
+    public ZlwShopGoodsUnit getShopGoodsUnitByName(@RequestBody String unitName){
+        ZlwShopGoodsUnit zlwShopGoodsUnit = iZlwShopGoodsUnitService.getShopGoodsUnitByName(unitName);
+        return zlwShopGoodsUnit;
+    }
+    /**
+     * nayunhao
+     *通过规格查询商品sku
+     * @param data
+     * @return
+     */
+    @PostMapping("/getShopGoodsBySpecs")
+    public List<ZlwShopGoodsSku> getShopGoodsBySpecs(@RequestBody  Map data){
+        String sgSpecs = (String)data.get("specs");
+        String sgStatus = (String)data.get("sgStatus");
+        QueryWrapper<ZlwShopGoodsSku> queryWrapper = new QueryWrapper<ZlwShopGoodsSku>();
+        queryWrapper.eq("sg_specs",sgSpecs);
+        queryWrapper.eq("sg_status",sgStatus);
+        List<ZlwShopGoodsSku> list = zlwShopGoodsSkuService.list(queryWrapper);
+        return list;
+    }
+    /**
+     *nayunhao
+     * 通过规格名称信息查询规格值数量
+     * @param data
+     * @return
+     */
+    @PostMapping("/countBySpecValueBySpecName")
+    public int countBySpecValueBySpecName(@RequestBody Map<String,String> data){
+        int count = iZlwShopGoodsSkuService.countBySpecValueBySpecName(data);
+        return count;
+    }
     @PostMapping("/getGoodsListByStatus")
     public List<ZlwShopGoodsSku> getGoodsListByStatus(@RequestBody Map data){
         Integer sgStatus = (Integer) data.get("sgStatus");
@@ -138,8 +197,6 @@ public class ZlwGoodsController {
         zlwShopGoodsSku.setShopId(shopId);
         return  iZlwShopGoodsSkuService.getGoodsListByStatus(zlwShopGoodsSku);
     }
-
-
 
 
     /**
@@ -162,5 +219,7 @@ public class ZlwGoodsController {
         }
         return apiResult;
     }
+
+
 
 }

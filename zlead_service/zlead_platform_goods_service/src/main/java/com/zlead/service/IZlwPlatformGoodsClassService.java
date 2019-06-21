@@ -21,6 +21,10 @@ public interface IZlwPlatformGoodsClassService extends IService<ZlwPlatformGoods
      * @param pgcId 不传参数/0时,查询一级分类
      */
     Map<String, Object> getPlatFormClass(String pgcId);
-
-
+    /**
+     *nayunhao
+     * 根据分类名称查询分类
+     *
+     */
+   ZlwPlatformGoodsClass getPlatGoodsClassByName(String className);
 }

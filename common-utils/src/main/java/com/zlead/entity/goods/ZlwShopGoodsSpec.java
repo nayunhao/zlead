@@ -28,7 +28,7 @@ package com.zlead.entity.goods;
             /**
             * 店铺商品编码
             */
-    private Long sgCode;
+    private String sgCode;
 
             /**
             * 规格id

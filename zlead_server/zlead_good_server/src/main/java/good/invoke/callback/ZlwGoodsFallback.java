@@ -2,10 +2,7 @@ package good.invoke.callback;
 
 import com.zlead.domain.ApiRequest;
 import com.zlead.domain.ApiResult;
-import com.zlead.entity.goods.ZlwShopGoods;
-import com.zlead.entity.goods.ZlwShopGoodsClass;
-
-import com.zlead.entity.goods.ZlwShopGoodsSku;
+import com.zlead.entity.goods.*;
 
 import good.invoke.ZlwGoodsInvoke;
 import org.springframework.stereotype.Component;
@@ -28,10 +25,7 @@ public class ZlwGoodsFallback implements ZlwGoodsInvoke {
         return null;
     }
 
-    @Override
-    public boolean addShopClass(ZlwShopGoodsClass zlwShopGoodsClass) {
-        return false;
-    }
+
 
     @Override
     public boolean setBatchGoodsClass(Map map) {
@@ -55,18 +49,86 @@ public class ZlwGoodsFallback implements ZlwGoodsInvoke {
         return false;
     }
 
+    /**
+     * nayunhao
+     * 添加商品分类
+     * @param zlwShopGoodsClass
+     * @return
+     */
+
+    @Override
+    public boolean addShopClass(ZlwShopGoodsClass zlwShopGoodsClass) {
+        return false;
+    }
+
+    /**
+     *nayunhao
+     * 根据名称获得分类
+     * @param className
+     * @return
+     */
     @Override
     public ZlwShopGoodsClass getClassByName(String className) {
         return null;
     }
 
+    /**
+     *nayunhao
+     * 单条添加商品
+     * @param data
+     * @return
+     */
     @Override
     public boolean addGoodsByOne(Map<String, Object> data) {
         return false;
+    }
+
+    /**
+     *nayunhao
+     * 根据名称获得品牌
+     * @param brandName
+     * @return
+     */
+    @Override
+    public ZlwShopGoodsBrand getShopGoodsBrandByName(String brandName) {
+        return null;
+    }
+
+    /**
+     * nayunhao
+     * 根据名称查询单位
+     * @param unitName
+     * @return
+     */
+    @Override
+    public ZlwShopGoodsUnit getShopGoodsUnitByName(String unitName) {
+        return null;
+    }
+    /**
+     * nayunhao
+     * @param data
+     * @return
+     */
+    @Override
+    public List<ZlwShopGoodsSku> getShopGoodsBySpecs(Map data) {
+        return null;
+    }
+
+    /**
+     *nayunhao
+     * 通过规格名称信息查询规格值数量
+     * @param data
+     * @return
+     */
+    @Override
+    public int countBySpecValueBySpecName(Map data) {
+        return -1;
     }
 
     @Override
     public ApiResult importGoods(ApiRequest apiRequest) {
         return null;
     }
+
+
 }

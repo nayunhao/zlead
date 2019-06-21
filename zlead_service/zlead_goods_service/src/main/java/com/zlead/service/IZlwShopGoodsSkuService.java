@@ -20,4 +20,11 @@ public interface IZlwShopGoodsSkuService extends IService<ZlwShopGoodsSku> {
 
     boolean batchSetGoodsClass(Map<String,Object> map);
     List<ZlwShopGoodsSku> getGoodsListByStatus(ZlwShopGoodsSku zlwShopGoodsSku);
+    /**
+     *
+     * 通过规格名称信息查询规格值数量
+     * @param data
+     * @return
+     */
+    int countBySpecValueBySpecName(Map data);
 }

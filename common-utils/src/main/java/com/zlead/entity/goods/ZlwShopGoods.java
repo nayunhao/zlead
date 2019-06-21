@@ -49,13 +49,30 @@ public class ZlwShopGoods implements Serializable {
     /**
      * 分类1
      */
-    private Long sgClass1;
+    private String sgClass1;
 
     /**
      * 分类2
      */
-    private Long sgClass2;
-
+    private String sgClass2;
+    /**
+     * nayunhao
+     *平台分类1
+     *
+     */
+    private String pgClass1;
+    /**
+     * nayunhao
+     *平台分类2
+     *
+     */
+    private String pgClass2;
+    /**
+     * nayunhao
+     *平台分类3
+     *
+     */
+    private String pgClass3;
     /**
      * 规格
      */
@@ -69,7 +86,7 @@ public class ZlwShopGoods implements Serializable {
     /**
      * 发布渠道 1：门店  2：网络
      */
-    private Integer sgFromSource;
+    private String sgSalesTarget;
 
     /**
      * 状态： -1：全部，1：销售中，2：下架中，3：违规下架
@@ -106,6 +123,15 @@ public class ZlwShopGoods implements Serializable {
      */
     private Integer sgIsDelete;
 
+    /**
+     * 平台品牌id
+     */
+    private String pgbId;
+    /**
+     * 店铺品牌id
+     *
+     */
+    private String sgbId;
     /**
      * 备注
      */

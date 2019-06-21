@@ -125,4 +125,19 @@ public class ZlwShopGoodsSkuServiceImpl extends ServiceImpl<ZlwShopGoodsSkuMappe
         }
         return true;
     }
+
+    /**
+     * nayunhao
+     * 通过规格名称信息获取规格值数量
+     * @param data
+     * @return
+     */
+    @Override
+    public int countBySpecValueBySpecName(Map data) {
+//        String sgcId = (String)data.get("sgcId");
+//        String sgsnName = (String)data.get("sgsnName");
+//        String sgsnValue = (String)data.get("sgsnValue");
+        int count = zlwShopGoodsSpecsNameMapper.countSgValueBySgName(data);
+        return count;
+    }
 }

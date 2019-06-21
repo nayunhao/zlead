@@ -1,5 +1,6 @@
 package com.zlead.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zlead.dao.mapper.ZlwShopGoodsUnitMapper;
 import com.zlead.entity.goods.ZlwShopGoodsUnit;
@@ -35,5 +36,19 @@ public class ZlwShopGoodsUnitServiceImpl extends ServiceImpl<ZlwShopGoodsUnitMap
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("unit", list);
         return resultMap;
+    }
+
+    /**
+     * nayunhao
+     * 根据单位名称获取单位
+     * @param unitName
+     * @return
+     */
+    @Override
+    public ZlwShopGoodsUnit getShopGoodsUnitByName(String unitName) {
+        QueryWrapper<ZlwShopGoodsUnit> queryWrapper = new QueryWrapper<ZlwShopGoodsUnit>();
+        queryWrapper.eq("sgu_name",unitName);
+        ZlwShopGoodsUnit zlwShopGoodsUnit = zlwShopGoodsUnitMapper.selectOne(queryWrapper);
+        return zlwShopGoodsUnit;
     }
 }
